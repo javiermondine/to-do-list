@@ -22,7 +22,7 @@ function renderProjects(projects, currentProjectId, projectClickHandler, project
     projectList.innerHTML = '';
     projects.forEach(project => {
         const li = document.createElement('li');
-        li.textContent = project.name;
+        li.innerHTML = `<span><i class="fas fa-list-ul"></i> ${project.name}</span>`;
         li.dataset.projectId = project.id;
         if (project.id === currentProjectId) {
             li.classList.add('active');
@@ -31,7 +31,8 @@ function renderProjects(projects, currentProjectId, projectClickHandler, project
         
         if (projects.length > 1) { // Don't allow deleting the last project
             const deleteBtn = document.createElement('button');
-            deleteBtn.textContent = 'X';
+            deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
+            deleteBtn.classList.add('delete-project-btn');
             deleteBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 projectDeleteHandler(project.id);
@@ -44,7 +45,7 @@ function renderProjects(projects, currentProjectId, projectClickHandler, project
 }
 
 function renderTodos(project) {
-    projectTitle.textContent = project.name;
+    projectTitle.innerHTML = `<i class="fas fa-tasks"></i> ${project.name}`;
     todoList.innerHTML = '';
     project.todos.forEach(todo => {
         const todoItem = document.createElement('li');
@@ -53,16 +54,22 @@ function renderTodos(project) {
             todoItem.classList.add('completed');
         }
 
-        const formattedDueDate = format(new Date(todo.dueDate), 'MMM do');
+        const formattedDueDate = format(new Date(todo.dueDate), 'MMM do, yyyy');
 
         todoItem.innerHTML = `
             <div>
                 <input type="checkbox" ${todo.completed ? 'checked' : ''} data-todo-id="${todo.id}">
-                <strong>${todo.title}</strong> - <span>${formattedDueDate}</span>
+                <div>
+                    <strong>${todo.title}</strong>
+                    <p>${todo.description}</p>
+                </div>
             </div>
-            <div>
-                <button class="edit-todo-btn" data-todo-id="${todo.id}">Edit</button>
-                <button class="delete-todo-btn" data-todo-id="${todo.id}">Delete</button>
+            <div class="todo-details">
+                <span>${formattedDueDate}</span>
+                <div class="actions">
+                    <button class="edit-todo-btn" data-todo-id="${todo.id}"><i class="fas fa-edit"></i></button>
+                    <button class="delete-todo-btn" data-todo-id="${todo.id}"><i class="fas fa-trash-alt"></i></button>
+                </div>
             </div>
         `;
         todoList.appendChild(todoItem);

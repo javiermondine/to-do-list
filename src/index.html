@@ -4,34 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
+    <header>
+        <h1><i class="fas fa-check-double"></i> Todo List</h1>
+    </header>
     <div id="app">
         <div class="sidebar">
-            <h2>Projects</h2>
+            <h2><i class="fas fa-project-diagram"></i> Projects</h2>
             <ul id="project-list"></ul>
-            <button id="add-project-btn">New Project</button>
+            <button id="add-project-btn" class="btn"><i class="fas fa-plus"></i> New Project</button>
         </div>
         <div class="main-content">
-            <h1 id="project-title"></h1>
+            <div class="project-header">
+                <h1 id="project-title"></h1>
+                <button id="add-todo-btn" class="btn btn-primary"><i class="fas fa-plus"></i> Add Todo</button>
+            </div>
             <ul id="todo-list"></ul>
-            <button id="add-todo-btn">New Todo</button>
         </div>
     </div>
 
     <div id="project-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
-            <h2>New Project</h2>
+            <h2><i class="fas fa-project-diagram"></i> New Project</h2>
             <input type="text" id="project-name-input" placeholder="Project Name">
-            <button id="submit-project-btn">Add Project</button>
+            <button id="submit-project-btn" class="btn btn-primary">Add Project</button>
         </div>
     </div>
 
     <div id="todo-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
-            <h2>New/Edit Todo</h2>
+            <h2><i class="fas fa-tasks"></i> New/Edit Todo</h2>
             <input type="hidden" id="todo-id">
             <input type="text" id="todo-title-input" placeholder="Title">
             <textarea id="todo-description-input" placeholder="Description"></textarea>
@@ -41,7 +47,7 @@
                 <option value="medium">Medium</option>
                 <option value="high">High</option>
             </select>
-            <button id="submit-todo-btn">Add/Update Todo</button>
+            <button id="submit-todo-btn" class="btn btn-primary">Add/Update Todo</button>
         </div>
     </div>
 </body>
